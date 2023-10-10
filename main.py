@@ -1,3 +1,4 @@
+"""We will to decipher the first 100 lines of this code just for practice."""
 """
 Neural-Backed Decision Trees training on CIFAR10, CIFAR100, TinyImagenet200
 
@@ -22,10 +23,13 @@ from nbdt.models.utils import load_state_dict, make_kwarg_optional
 from nbdt.tree import Tree
 
 
+# the main function.
 def main():
     maybe_install_wordnet()
+    # variable stores 3 different arguements.
     datasets = data.cifar.names + data.imagenet.names + data.custom.names
     parser = argparse.ArgumentParser(description="PyTorch CIFAR Training")
+    # parser takes in some arguements. Which looks like data characteristics.
     parser.add_argument(
         "--batch-size", default=512, type=int, help="Batch size used for training"
     )
@@ -86,6 +90,7 @@ def main():
     loss.add_arguments(parser)
     analysis.add_arguments(parser)
 
+    # Continue reading from here. 10 October.
     args = parser.parse_args()
     loss.set_default_values(args)
 
@@ -140,7 +145,9 @@ def main():
         testset, batch_size=100, shuffle=False, num_workers=2
     )
 
-    Colors.cyan(f"Training with dataset {args.dataset} and {len(trainset.classes)} classes")
+    Colors.cyan(
+        f"Training with dataset {args.dataset} and {len(trainset.classes)} classes"
+    )
     Colors.cyan(
         f"Testing with dataset {args.dataset_test or args.dataset} and {len(testset.classes)} classes"
     )
@@ -257,7 +264,6 @@ def main():
             )
         scheduler.step()
 
-
     @analyzer.test_function
     def test(epoch, checkpoint=True):
         nonlocal best_acc
@@ -330,5 +336,6 @@ def main():
 
     print(f"Best accuracy: {best_acc} // Checkpoint name: {checkpoint_fname}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
